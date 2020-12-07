@@ -76,14 +76,14 @@ module.exports = {
             });
             let json = JSON.parse(response.body);
             Object.keys(json.Product.children).forEach(function (key) {
-                if (json.Product.children[key].market.lowestAsk == 0) return;
+                if (json.Product.children[key].market.highestBid == 0) return;
                 //if size is in womens, then remove "W"
                 var size = json.Product.children[key].shoeSize
                 if(size[size.length-1] == 'W'){
                     size = size.substring(0, size.length - 1);
                     
                 }
-                priceMap[size] = json.Product.children[key].market.lowestAsk;
+                priceMap[size] = json.Product.children[key].market.highestBid;
                 
             });
             shoe.resellPrices.stockX = priceMap;
